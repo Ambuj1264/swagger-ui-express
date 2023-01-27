@@ -1,0 +1,33 @@
+{
+    "components": {
+        "schemas": {
+            "User": {
+                "$ref": "#/hello",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "$ref": "#/man"
+                    },
+                    "data": {
+                        "type": "Date",
+                        "$ref": "#/hi"
+                    }
+                }
+            }
+        }
+    },
+    "hello": {
+        "mabuj": "ambuj"
+    },
+    "man": {
+        "hi": "ambuj"
+    },
+    "hi": {
+        "hi": {}
+    }
+}

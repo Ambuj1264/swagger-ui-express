@@ -1,0 +1,147 @@
+swagger: '2.0'
+info:
+  title: testing API
+  description: this is my testing swagger api for company purpose
+  version: '2.0'
+  contact: 
+    email: "heyambujsingh@gmail.com"
+    phone: '8953176600'
+    Address: "Noida sector-1 UP"
+
+  liscence: 
+    name: ZIPAWORLD
+    url: "www.zipaworld.com"
+  servers:
+    -url: http://localhost:3000
+    description: THis is my local Server
+    -url: http://www.zipaworld.com/
+    description: This is my original URL
+schemes: [http,https]
+
+paths:
+  /get:
+    get:    
+     summary: Return a String
+     description: get all the data from masters
+     responses:
+        "200": #status code 
+          description: Successfull Response
+          schema:   
+            type: array
+            items:
+              type: object
+              properties: 
+                id: 
+                  type: number
+                name:
+                  type: string
+                email: 
+                  type: string
+                password: 
+                  type: string
+                date:
+                  type: string
+
+
+         
+        "400": 
+          description: Error Response 
+          # schema: 
+          #   type: array
+          #   items: 
+          #     type: object
+          #     properties:
+          #       id:
+          #         type: integer
+          #       name:
+          #         type: string
+
+    
+      
+  /post:
+    post:
+      summary: Adds a new user
+      description: add new user from your database
+      produces:
+        - application/json
+      consumes:
+        - application/json 
+      parameters:
+          in: body
+          name: body
+          schema:
+           $ref: "#/components/schemas/User"
+      responses:
+        "200": #status code 
+          description: Successfull Response
+          
+        "400": 
+          description: "Error Response "
+#Get Request with path id
+  /get/{id}:
+    get:
+      summary: Return a user by ID
+      description: Return the specific User
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: 
+            type: integer
+            formate: int64
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+            example: [{"_id": "63c7e590b19b46edb1ee16a8","name": "hello","email": "hello","password": "hello","date": "2022-11-30T18:30:00.000Z","__v": 0},]
+
+        "400":
+          description: "Error Response"
+        
+  /upload:
+    post:
+      tags:
+        - Upload
+      summary: Upload Video/Image for Inferring
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          required: true
+          description: The file to upload.
+        - in: formData
+          name: app
+          type: string
+           required: true
+          description: Name of the model.
+        - in: formData
+          name: id
+          type: string
+          required: true
+          description: Some random Id.
+      responses:
+        200:
+          description: Successful Response
+        400:
+          description: User Error
+        500:
+          description: Internal Server Error     
+  
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+          
+        email:
+          type: string
+        password:
+          type: string
+        date:
+           type: Date,
+           default: Date.now
